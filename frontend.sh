@@ -1,6 +1,6 @@
  echo Installing Nginx
  yum install nginx -y &>> /tmp/frontend.sh
- echo status =?
+ echo status = $?
 
  echo Downloading Nginx web content
  curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>> /tmp/frontend.sh
