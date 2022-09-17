@@ -18,3 +18,21 @@ echo status =$?
 echo "Restarting MOngodb Server"
 systemctl restart mongod &>>$LOG_FILE
 echo status =$?
+
+echo "Downloading Mongodb Schema files"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG_FILE
+echo status =$?
+
+cd /tmp
+echo "Extracting mongobd schema files"
+unzip mongodb.zip &>>$LOG_FILE
+echo status =$?
+
+cd mongodb-main
+echo "Loading catalogue service schema"
+mongo < catalogue.js &>>$LOG_FILE
+echo status =$?
+
+echo "Loading user service schema"
+mongo < users.js &>>$LOG_FILE
+echo status =$?
