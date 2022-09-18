@@ -33,7 +33,7 @@ sed -i -e 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /home/roboshop/catalogue/s
 echo status=$?
 
 echo "setup catalogue service"
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 echo status=$?
 
 systemctl daemon-reload &>>$LOG_FILE
