@@ -16,6 +16,7 @@ echo "Download Catalogue Application code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$LOG_FILE
 echo status=$?
 
+
 cd /home/roboshop
 echo "extracting catalogue application code"
 unzip /tmp/catalogue.zip &>>$LOG_FILE
