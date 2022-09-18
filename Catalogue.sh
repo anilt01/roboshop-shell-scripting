@@ -17,28 +17,29 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/cat
 echo status=$?
 
 
-cd /home/roboshop
-echo "extracting catalogue application code"
-unzip /tmp/catalogue.zip &>>$LOG_FILE
-echo status=$?
 
-mv catalogue-main catalogue
-cd /home/roboshop/catalogue
+###cd /home/roboshop
+###echo "extracting catalogue application code"
+###unzip /tmp/catalogue.zip &>>$LOG_FILE
+###echo status=$?
 
-echo "Install NodeJS dependencies"
-npm install &>>$LOG_FILE
-echo status=$?
+###mv catalogue-main catalogue
+###cd /home/roboshop/catalogue
 
-echo "update systemd files with mongodb address"
-sed -i -e 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
-echo status=$?
+###echo "Install NodeJS dependencies"
+###npm install &>>$LOG_FILE
+###echo status=$?
 
-echo "setup catalogue service"
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>LOG_FILE
-echo status=$?
+###echo "update systemd files with mongodb address"
+###sed -i -e 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
+###echo status=$?
 
-systemctl daemon-reload &>>$LOG_FILE
-systemctl enable catalogue &>>$LOG_FILE
-echo "restart catalogue service"
-systemctl restart catalogue &>>$LOG_FILE
-echo status=$?
+###echo "setup catalogue service"
+###mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>LOG_FILE
+###echo status=$?
+
+###systemctl daemon-reload &>>$LOG_FILE
+###systemctl enable catalogue &>>$LOG_FILE
+###echo "restart catalogue service"
+###systemctl restart catalogue &>>$LOG_FILE
+###echo status=$?
