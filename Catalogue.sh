@@ -29,11 +29,11 @@ npm install &>>$LOG_FILE
 echo status=$?
 
 echo "update systemd files with mongodb address"
-sed -i -e 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>LOG_FILE
+sed -i -e 's/MONGO_DNSNAME/mogodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
 echo status=$?
 
 echo "setup catalogue service"
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>LOG_FILE
 echo status=$?
 
 systemctl daemon-reload &>>$LOG_FILE
