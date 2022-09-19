@@ -15,11 +15,13 @@ StatusCheck $?
  echo remove previous web content
  rm -rf * &>>LOG_FILE
 StatusCheck $?
+
  echo unzipping files
  unzip /tmp/frontend.zip &>>LOG_FILE
  mv frontend-main/static/* . &>>LOG_FILE
  mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend
 StatusCheck $?
+
  echo Starting Nginx Service
  systemctl enable nginx &>>LOG_FILE
  systemctl restart nginx &>>LOG_FILE
