@@ -34,12 +34,12 @@ mv user-main user
 cd /home/roboshop/user
 
 echo "Installing NodeJS package"
-npm install
+npm install &>>${LOG_FILE}
 StatusCheck $?
 
 
 echo "Updating Redis and Mongodb IP address in SystemD file"
-sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal'  /home/roboshop/user/systemd.service
+sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  /home/roboshop/user/systemd.service &>>${LOG_FILE}
 StatusCheck $?
 
 mv /home/roboshop/user/systemd.service /etc/systemd/system/user.service
