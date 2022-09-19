@@ -2,11 +2,11 @@ LOG_FILE=/tmp/catalogue
 
 echo "Download NodeJS package"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
-if [ $? -e 0 ];
+if [ $? -eq 0 ];
 then
-echo status= \e[32mSUCCESS\e[0m
+echo status= "\e[32mSUCCESS\e[0m"
 else
-echo status= \e[31mFAILURE\e[0m
+echo status= "\e[31mFAILURE\e[0m"
 exit 1
 fi
 
