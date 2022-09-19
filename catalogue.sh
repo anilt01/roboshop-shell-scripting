@@ -8,6 +8,9 @@ echo "Installing NodeJS package"
 yum install nodejs -y &>>${LOG_FILE}
 echo status=$?
 
+id roboshop &>>${LOG_FILE}
+if [ $? -ne 0 ]
+then
 echo "Adding roboshop user to the application"
 useradd roboshop &>>${LOG_FILE}
 echo status=$?
