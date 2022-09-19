@@ -2,7 +2,13 @@ LOG_FILE=/tmp/catalogue
 
 echo "Download NodeJS package"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
-echo status=$?
+if [ $? -e 0 ];
+then
+echo status= \e[32mSUCCESS\e[0m
+else
+echo status= \e[31mFAILURE\e[0m
+exit 1
+fi
 
 echo "Installing NodeJS package"
 yum install nodejs -y &>>${LOG_FILE}
