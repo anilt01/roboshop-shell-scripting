@@ -36,7 +36,6 @@ echo status=$?
 echo "Updating Mongodb Ip address in SystemD file"
 sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal'
 echo status=?
-##Update MONGO_DNSNAME with MongoDB Server IP
 
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 
