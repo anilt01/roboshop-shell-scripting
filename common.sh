@@ -1,7 +1,10 @@
-ID=$ (id -u)
-if [ id -ne 0 ]; then
+
+ID= $(id -u)
+if [ $ID -ne 0 ]; then
   echo "you should run this script as a root user or with sudo privileges"
+  exit 1
 fi
+
 
 StatusCheck() {
 if [ $? -eq 0 ];
