@@ -9,11 +9,11 @@ yum install nodejs -y &>>${LOG_FILE}
 echo status=$?
 
 id roboshop &>>${LOG_FILE}
-if [ $? -ne 0 ]
-then
+if [ $? -ne 0 ]; then
 echo "Adding roboshop user to the application"
 useradd roboshop &>>${LOG_FILE}
 echo status=$?
+fi
 
 echo "Downloading application code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
