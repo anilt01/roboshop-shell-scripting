@@ -20,7 +20,7 @@ echo status=$?
 cd /home/roboshop
 
 echo "extracting the catalogue application code"
-unzip /tmp/catalogue.zip &>>${LOG_FILE}
+unzip /tmp/catalogue.zip -y &>>${LOG_FILE}
 echo status=$?
 
 mv catalogue-main catalogue
