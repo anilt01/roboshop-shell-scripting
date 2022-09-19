@@ -49,5 +49,5 @@ systemctl enable catalogue &>>${LOG_FILE}
 StatusCheck $?
 
 echo "restarting catalogue service"
-systemctl start catalogue &>>${LOG_FILE}
+systemctl restart catalogue &>>${LOG_FILE}
 StatusCheck $?
