@@ -7,7 +7,7 @@ StatusCheck $?
 
 echo "Installing NodeJS package"
 yum install nodejs -y &>>${LOG_FILE}
-echo status=$?
+StatusCheck $?
 
 id roboshop &>>${LOG_FILE}
 if [ $? -ne 0 ]; then
