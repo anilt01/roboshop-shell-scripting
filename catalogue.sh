@@ -14,7 +14,7 @@ echo status=$?
 
 echo "Downloading application code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
-echo status=?
+echo status=$?
 
 cd /home/roboshop
 
@@ -34,7 +34,7 @@ npm install &>>${LOG_FILE}
 echo status=$?
 
 echo "Updating Mongodb Ip address in SystemD file"
-sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal' /home/roboshop/catalogue/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/roboshop/catalogue/systemd.service
 echo status=$?
 
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
