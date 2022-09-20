@@ -40,7 +40,7 @@ NodeJS() {
   cd /home/roboshop
 
   echo " clear previous files/ app data"
-
+  rm -rf ${COMPONENT} ${COMPONENT}-main
   StatusCheck $?
 
   echo "extracting application code"
