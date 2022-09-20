@@ -56,7 +56,7 @@ NodeJS() {
 
 
   echo "Updating Redis and Mongodb IP address in SystemD file"
-  sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  /home/roboshop/${COMPONENT}/systemd.service &>>${LOG_FILE}
+  sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/'  /home/roboshop/${COMPONENT}/systemd.service
   StatusCheck $?
 
   mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
