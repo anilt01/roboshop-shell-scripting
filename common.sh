@@ -55,7 +55,7 @@ NodeJS() {
   StatusCheck $?
 
 
-  echo "Updating Redis and Mongodb IP address in SystemD file"
+  echo "Updating IP address in SystemD file"
   sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
   StatusCheck $?
 
