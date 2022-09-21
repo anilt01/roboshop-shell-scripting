@@ -18,7 +18,7 @@ systemctl enable mysqld &>>${LOG_FILE}
 StatusCheck $?
 
 echo "restarting the server"
-systemctl start mysqld
+systemctl start mysqld &>>${LOG_FILE}
 StatusCheck $?
 
 echo "declaring the default password"
@@ -28,9 +28,12 @@ StatusCheck $?
 echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
 FLUSH PRIVILEGES;" >/tmp/root-pass.sql
 
-echo "Change the default password"
-mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql
+echo "show databases" |mysql -uroot -p$"{ROBOSHOP_MYSQL_PASSWORD}"
+if ($? -ne 0); then
+  echo "Change the default password"
+mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql &>>${LOG_FILE}
 StatusCheck $?
+fi
 
 # mysql_secure_installation
 # mysql -uroot -pRoboShop@1
