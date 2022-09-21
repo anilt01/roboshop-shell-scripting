@@ -36,9 +36,10 @@ StatusCheck $?
 fi
 
 echo 'show plugins' | mysql -uroot -pRoboShop@1 | grep 'validate_password'
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
   echo "uninstall password plugin validation"
   echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1
+fi
 
 # mysql_secure_installation
 # mysql -uroot -pRoboShop@1
