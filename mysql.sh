@@ -28,8 +28,8 @@ StatusCheck $?
 echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD($'{ROBOSHOP_MYSQL_PASSWORD}');
 FLUSH PRIVILEGES;" >/tmp/root-pass.sql
 
-echo "login to mysql server"
-mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} </tmp/root-pass.sql
+echo "Change the default password"
+mysql -uroot -p${DEFAULT_PASSWORD} </tmp/root-pass.sql
 StatusCheck $?
 
 # mysql_secure_installation
