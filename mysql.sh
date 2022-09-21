@@ -22,7 +22,7 @@ systemctl start mysqld
 StatusCheck $?
 
 echo "declaring the default password"
-DEFAULT_PASSWORD= $(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 StatusCheck $?
 
 echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD($'{ROBOSHOP_MYSQL_PASSWORD}');
