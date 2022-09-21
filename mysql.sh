@@ -35,18 +35,23 @@ mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.
 StatusCheck $?
 fi
 
-echo 'show plugins' | mysql -uroot -pRoboShop@1 | grep 'validate_password'
+echo 'show plugins' | mysql -uroot -pRoboShop@1 | grep 'validate_password' &>>${LOG_FILE}
 if [ $? -ne 0 ]; then
   echo "uninstall password plugin validation"
-  echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1
+  echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1 &>>${LOG_FILE}
 fi
 
-# mysql_secure_installation
-# mysql -uroot -pRoboShop@1
-## IN MY SQL>
 # uninstall plugin validate_password;
-# curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-# cd /tmp
-# unzip mysql.zip
-# cd mysql-main
-# mysql -u root -pRoboShop@1 <shipping.sql
+echo "download schema"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>${LOG_FILE}
+StatusCheck $?
+cd /tmp
+
+echo "extracting schema"
+unzip mysql.zip &>>${LOG_FILE}
+StatusCheck $?
+
+echo "load schema"
+cd mysql-main
+mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>${LOG_FILE}
+StatusCheck $?
