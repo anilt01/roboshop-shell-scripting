@@ -35,6 +35,11 @@ mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.
 StatusCheck $?
 fi
 
+echo 'show plugins' | mysql -uroot -pRoboShop@1 | grep 'validate_password'
+if [ $? -ne 0]; then
+  echo "uninstall password plugin validation"
+  echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1
+
 # mysql_secure_installation
 # mysql -uroot -pRoboShop@1
 ## IN MY SQL>
