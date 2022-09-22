@@ -70,3 +70,5 @@ NodeJS() {
   systemctl restart ${COMPONENT} &>>${LOG_FILE}
   StatusCheck $?
 }
+
+
