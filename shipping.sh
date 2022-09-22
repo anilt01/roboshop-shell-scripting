@@ -15,36 +15,36 @@ id roboshop &>>${LOG_FILE}
 cd /home/roboshop
 
 echo "Downloading schema"
-curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip"
+curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip" &>>${LOG_FILE}
 StatusCheck $?
 
 cd /tmp
-rm -rf shipping-main
+rm -rf shipping-main &>>${LOG_FILE}
 
 echo "extracting schema"
-unzip /tmp/shipping.zip
+unzip /tmp/shipping.zip &>>${LOG_FILE}
 StatusCheck $?
 
 mv shipping-main shipping
 cd shipping
 
 echo "remove all the files from previous builds"
-mvn clean package
+mvn clean package &>>${LOG_FILE}
 StatusCheck $?
 
 mv target/shipping-1.0.jar shipping.jar
 
 echo "updating systemd service files"
-sed -i -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' /home/roboshop/shipping/systemd.service
+sed -i -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' /home/roboshop/shipping/systemd.service &>>${LOG_FILE}
 StatusCheck $?
 
 mv /home/roboshop/shipping/systemd.service /etc/systemd/system/shipping.service
 
 echo "setting up shipping service"
-systemctl daemon-reload
-systemctl enable shipping
+systemctl daemon-reload &>>${LOG_FILE}
+systemctl enable shipping &>>${LOG_FILE}
 StatusCheck $?
 
 echo "Restarting shipping service"
-systemctl restart shipping
+systemctl restart shipping &>>${LOG_FILE}
 StatusCheck $?
