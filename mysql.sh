@@ -45,8 +45,8 @@ fi
 echo "download schema"
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>${LOG_FILE}
 StatusCheck $?
-cd /tmp/mysql
-rm -rf mysql mysql-main /tmp
+cd /tmp
+rm -rf mysql-main /tmp
 echo "extracting schema"
 unzip mysql.zip &>>${LOG_FILE}
 StatusCheck $?
