@@ -1,5 +1,5 @@
 LOG_FILE=/tmp/shipping
-Source common.sh
+source common.sh
 
 echo "Installing Maven package"
 yum install maven -y &>>${LOG_FILE}
