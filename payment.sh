@@ -19,7 +19,7 @@ curl -L -s -o /tmp/payment.zip "https://github.com/roboshop-devops-project/payme
 StatusCheck $?
 
 cd /home/roboshop
-rm -rf payment-main payment
+rm -rf payment
 
 echo "extracting schema"
 unzip /tmp/payment.zip &>>${LOG_FILE}
@@ -28,7 +28,7 @@ StatusCheck $?
 mv payment-main payment
 StatusCheck $?
 
-cd /home/roboshop/payment
+cd /home/roboshop
 
 echo "Installing dependencies"
 pip3 install --user -r requirements.txt &>>${LOG_FILE}
