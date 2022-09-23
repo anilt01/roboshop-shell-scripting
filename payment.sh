@@ -31,7 +31,9 @@ StatusCheck $?
 cd /home/roboshop/payment
 
 echo "Installing dependencies"
-pip3 install --user -r requirements.txt
+pip3 install --user -r requirements.txt &>>${LOG_FILE}
+
+
 
 #Update the roboshop user and group id payment.ini file.
 #Update SystemD service file
