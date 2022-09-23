@@ -30,7 +30,7 @@ mv shipping-main shipping
 cd shipping
 
 echo "remove all the files from previous builds"
-mvn clean package
+mvn clean package ${LOG_FILE}
 StatusCheck $?
 
 mv target/shipping-1.0.jar shipping.jar
