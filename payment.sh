@@ -19,7 +19,7 @@ curl -L -s -o /tmp/payment.zip "https://github.com/roboshop-devops-project/payme
 StatusCheck $?
 
 cd /tmp
-rm -rf payment-main
+rm -rf payment-main payment
 
 echo "extracting schema"
 unzip /tmp/payment.zip &>>${LOG_FILE}
