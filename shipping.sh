@@ -31,7 +31,7 @@ StatusCheck $?
 cd shipping
 
 echo "remove all the files from previous builds"
-mvn clean package ${LOG_FILE}
+mvn clean package &>>${LOG_FILE}
 StatusCheck $?
 
 mv target/shipping-1.0.jar shipping.jar
