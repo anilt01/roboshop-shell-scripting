@@ -18,7 +18,7 @@ echo "Downloading payment schema"
 curl -L -s -o /tmp/payment.zip "https://github.com/roboshop-devops-project/payment/archive/main.zip" &>>${LOG_FILE}
 StatusCheck $?
 
-cd /tmp
+cd /home/roboshop
 rm -rf payment-main payment
 
 echo "extracting schema"
