@@ -1,4 +1,4 @@
-LOG_FILE=/tmp/shipping
+LOG_FILE=/tmp/shipping1
 source common.sh
 
 echo "Installing Maven package"
@@ -26,6 +26,7 @@ unzip /tmp/shipping.zip &>>${LOG_FILE}
 StatusCheck $?
 
 mv shipping-main shipping
+
 cd shipping
 
 echo "remove all the files from previous builds"
