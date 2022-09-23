@@ -18,7 +18,7 @@ echo "Downloading schema"
 curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip" &>>${LOG_FILE}
 StatusCheck $?
 
-cd /tmp/shipping
+cd /home/roboshop
 rm -rf shipping-main shipping &>>${LOG_FILE}
 
 echo "extracting schema"
