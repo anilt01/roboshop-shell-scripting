@@ -26,6 +26,8 @@ unzip /tmp/payment.zip &>>${LOG_FILE}
 StatusCheck $?
 
 mv payment-main payment
+StatusCheck $?
+
 cd /home/roboshop/payment
 
 echo "Installing dependencies"
