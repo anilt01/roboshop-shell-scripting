@@ -1,4 +1,4 @@
-LOG_FILE=/tmp/shipping1
+LOG_FILE=/tmp/shipping
 source common.sh
 
 echo "Installing Maven package"
@@ -18,7 +18,7 @@ echo "Downloading schema"
 curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip" &>>${LOG_FILE}
 StatusCheck $?
 
-cd /tmp
+cd /tmp/shipping
 rm -rf shipping-main &>>${LOG_FILE}
 
 echo "extracting schema"
