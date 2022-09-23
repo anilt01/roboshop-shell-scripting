@@ -26,6 +26,7 @@ unzip /tmp/shipping.zip &>>${LOG_FILE}
 StatusCheck $?
 
 mv shipping-main shipping
+StatusCheck $?
 
 cd shipping
 
