@@ -19,7 +19,7 @@ curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/ship
 StatusCheck $?
 
 cd /tmp/shipping
-rm -rf shipping-main &>>${LOG_FILE}
+rm -rf shipping-main shipping &>>${LOG_FILE}
 
 echo "extracting schema"
 unzip /tmp/shipping.zip &>>${LOG_FILE}
