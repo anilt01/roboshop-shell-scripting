@@ -16,6 +16,51 @@ exit 1
 fi
 }
 
+APP_PREREQ() {
+    id roboshop &>>${LOG_FILE}
+    if [ $? -ne 0 ]; then
+    echo "Adding roboshop user to the application"
+    useradd roboshop &>>${LOG_FILE}
+    StatusCheck $?
+    fi
+
+    echo "Downloading application code"
+    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG_FILE}
+    StatusCheck $?
+
+    cd /home/roboshop
+
+    echo " clear previous files/ app data"
+    rm -rf ${COMPONENT}
+    StatusCheck $?
+
+    echo "extracting application code"
+    unzip /tmp/${COMPONENT}.zip &>>${LOG_FILE}
+    StatusCheck $?
+
+    mv ${COMPONENT}-main ${COMPONENT}
+    cd /home/roboshop/${COMPONENT}
+}
+
+SYSTEMD_SETUP() {
+
+echo "Updating IP address in SystemD file"
+  sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
+  StatusCheck $?
+
+  echo "${COMPONENT} service setup"
+  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
+  StatusCheck $?
+
+  systemctl daemon-reload &>>${LOG_FILE}
+  systemctl enable ${COMPONENT} &>>${LOG_FILE}
+
+
+  echo "restarting ${COMPONENT} service"
+  systemctl restart ${COMPONENT} &>>${LOG_FILE}
+  StatusCheck $?
+}
+
 NodeJS() {
 
   echo "Download NodeJS package"
@@ -26,49 +71,13 @@ NodeJS() {
   yum install nodejs -y &>>${LOG_FILE}
   StatusCheck $?
 
-  id roboshop &>>${LOG_FILE}
-  if [ $? -ne 0 ]; then
-  echo "Adding roboshop user to the application"
-  useradd roboshop &>>${LOG_FILE}
-  StatusCheck $?
-  fi
+  APP_PREREQ
 
-  echo "Downloading application code"
-  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG_FILE}
-  StatusCheck $?
-
-  cd /home/roboshop
-
-  echo " clear previous files/ app data"
-  rm -rf ${COMPONENT} ${COMPONENT}-main
-  StatusCheck $?
-
-  echo "extracting application code"
-  unzip /tmp/${COMPONENT}.zip &>>${LOG_FILE}
-  StatusCheck $?
-
-  mv ${COMPONENT}-main ${COMPONENT}
-  cd /home/roboshop/${COMPONENT}
-
-  echo "Installing NodeJS package"
+  echo "Installing NodeJS dependencies"
   npm install &>>${LOG_FILE}
   StatusCheck $?
 
-
-  echo "Updating IP address in SystemD file"
-  sed -i -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
-  StatusCheck $?
-
-  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
-
-  echo "${COMPONENT} service setup"
-  systemctl daemon-reload &>>${LOG_FILE}
-  systemctl enable ${COMPONENT} &>>${LOG_FILE}
-  StatusCheck $?
-
-  echo "restarting ${COMPONENT} service"
-  systemctl restart ${COMPONENT} &>>${LOG_FILE}
-  StatusCheck $?
+  SYSTEMD_SETUP
 }
 
 
