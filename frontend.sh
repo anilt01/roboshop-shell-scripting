@@ -1,6 +1,6 @@
  LOG_FILE=/tmp/frntend
  source common.sh
- 
+
  echo Installing Nginx
  yum install nginx -y &>>LOG_FILE
 StatusCheck $?
